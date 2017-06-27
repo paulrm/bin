@@ -1,0 +1,53 @@
+#!/c/bin/cmder/vendor/git-for-windows/bin/bash
+echo ":::::::::::"
+echo ": INFO    :"
+echo ":::::::::::"
+
+find . -maxdepth 1 -type d -name "*" -print > /c/tmp/list.lst
+
+if [ -f README.txt ] 
+then
+    echo "D: Hay un README.txt"
+	gawk -v LIST=/c/tmp/list.lst 'BEGIN {
+		
+    while(( getline < LIST) > 0 )
+     {
+        print "-->" $0
+     }
+		
+		inManifest=0
+		FS="|"
+	}
+	/^# Manifest #/ {
+		inManifest=1
+	}
+	/^# End-Manifest #/ {
+		inManifest=0
+	}
+	{
+	if(substr($0,0,1)=="#")
+		{
+		next
+		}
+	if(inManifest==1)
+		print "D: " $1 " -- " $2 "-- " substr($0,0,1)
+	}
+	END {
+		print "D: End gawk"
+	}' README.txt
+	
+	
+fi
+
+find . -maxdepth 1 -type f -name "*" -print
+
+echo "#"
+
+list=$( find . -maxdepth 1 -type f -name "*" -print )
+
+for file in $list
+do
+    md5=$( md5sum $file)
+	#printf "%60s %30s\n", $file, $md5
+	echo $md5
+done
