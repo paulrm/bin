@@ -2,6 +2,13 @@ echo ":::::::::::"
 echo ": Catalog :"
 echo ":::::::::::"
 
+
+
+find . -maxdepth 1 -type d  -print
+
+
+
+exit
 find . -maxdepth 1 -type f -name "*.jpg" -print
 
 echo "#"

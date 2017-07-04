@@ -1,0 +1,125 @@
+#!/usr/bin/bash
+
+##echo $PATH | gawk 'BEGIN { RS=":" } { print $0 }'
+
+
+#Desc: Lista los comandos disponbles y su descripcions
+usage="Usage: cmds [OPTION] ..."
+help=$(cat <<'END_HEREDOC'
+Mandatory arguments to long options are mandatory for short options too.
+  -p,            Lista los cmds que no tienen doc     
+  -h, --help     display this help and exit
+      --version  output version information and exit
+END_HEREDOC
+)
+showFiles='false'
+while getopts ":hp" opt; do
+  case $opt in
+    h)
+      echo "$usage"
+      echo "$help"
+      exit
+      ;;
+    p)
+      #echo "-p was triggered!" >&2
+      showFiles='true'
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+  esac
+done
+
+ok=0
+pending=0
+
+dirs="/c/Users/Messina Paul/bin"
+
+
+OLDIFS=$IFS
+IFS=$'\n'
+files=($(find "$dirs" -maxdepth 1 -type f  -executable -print | sort ))
+IFS=$OLDIFS
+
+# get length of an array
+tLen=${#files[@]}
+ 
+# use for loop read all filenames
+for (( i=0; i<${tLen}; i++ ));
+do
+	#echo "${files[$i]}"
+	f=$(basename "${files[$i]}")
+	cc=$( gawk 'BEGIN { 
+				FS=":" 
+			}
+			/#Desc:/ { 
+			   print $2 
+			   exit -1
+			}' "${files[$i]}" )  
+	if [ $? -eq 0 ]
+	then
+		if [ $showFiles = 'true' ]
+		then
+			if [ "$cc" = "" ]
+			then
+				cc="-"
+			fi
+			pending=$( expr $pending + 1 )
+			printf "%-30s | %-60s  %-20s\n" $f $cc "$( dirname "${files[$i]}")"
+		fi
+	else
+		ok=$( expr $ok + 1 )
+		printf "%-30s | %-60s\n" $f "$cc"
+	fi
+done
+if [  "$showFiles" = 'true' ]
+then
+    echo "ok " $ok " pending " $pending " total " $(expr $ok + $pending )
+else
+    echo "ok " $ok 
+fi
+
+exit
+for file in $files
+do
+        echo ":::" "$file"
+        f=$(basename "$file")
+        cc=$( gawk 'BEGIN { 
+        FS=":" 
+                    }
+                    /#Desc:/ { 
+                       print $2 
+                       exit -1
+                    }' "$file" )
+        if [ $? -eq 0 ]
+        then
+            if [ $showFiles = 'true' ]
+            then
+                if [ "$cc" = "" ]
+                then
+                    cc="-"
+                fi
+                pending=$( expr $pending + 1 )
+                printf "%-30s | %-60s  %-20s\n" $f $cc $( dirname $file)
+            fi
+        else
+            ok=$( expr $ok + 1 )
+            printf "%-30s | %-60s\n" $f "$cc"
+        fi
+        #echo $file $? 
+        # if [ $? -eq -1 ]
+        # then
+        #     printf "%-30s | %-50s | \n" $file "$cc"
+        # fi
+        # if [ $verbose ]
+        # then
+        # else
+        #      echo "Fails"
+        # fi
+done
+if [  "$showFiles" = 'true' ]
+then
+    echo "ok " $ok " pending " $pending " total " $(expr $ok + $pending )
+else
+    echo "ok " $ok 
+fi
