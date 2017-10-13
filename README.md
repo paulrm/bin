@@ -17,3 +17,8 @@ bash for windows scripts
 
 ## 2017-07-04
 * Agregado de h y cmds, levemente adaptados
+
+
+
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/0zZ2d0Xdnjg/0.jpg)]
+(http://www.youtube.com/watch?v=0zZ2d0Xdnjg "Video Title"
