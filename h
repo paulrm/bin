@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 #Desc: Muestra tareas usuales
 
 SELF=$( basename $0 )
@@ -6,7 +6,7 @@ SELF_LONG=$0
 SELF_VERSION="0.01"
 SELF_AUTHOR="Paul Messina"
 
-TEMP=`getopt -o vhdm: \
+TEMP=`getopt -o vh1dm: \
              --long version,help,verbose,debug,memory:,debugfile:,minheap:,maxheap: \
              -n 'h' -- "$@"`
 
@@ -94,6 +94,16 @@ aws route53 list-hosted-zones --no-verify-ssl  --output text
 End-of-message
 }
 
+
+function page1() {
+cat <<End-of-message
+-------------------------------------
+service --status-all  | egrep "postgresql|nginx|circusd|rabbitmq-server"
+dpkg --list > ~/etc/packages.lst
+ack --type-set='all:match:.*' -k patt
+-------------------------------------
+End-of-message
+}
 function listHosts() {
    if [ -f /etc/ansible/hosts ] 
    then
@@ -107,12 +117,17 @@ function listHosts() {
    fi
 }
 
-while getopts ":a:hc" opt; do
+while getopts ":a:hc1" opt; do
+
+echo "#opt $opt"
   case $opt in
     a)
       echo "-a was triggered, Parameter: $OPTARG" >&2
       echo $OPTARG >> ~/dev/etc/cmds.txt
       sort -u ~/dev/etc/cmds.txt -o ~/dev/etc/cmds.txt
+      ;;
+    1)
+      page1
       ;;
     c)
       cat ~/dev/etc/cmds.txt
