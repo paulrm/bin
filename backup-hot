@@ -68,53 +68,41 @@ DAYS=""
 ## Ejecuto el export
     
     msg "## inicio el export"
-    DESTTEMP=/backup/tempdump/
     bk=$( cd $DIR ; sudo -u taiga pg_dump taiga > ./taiga_dump.sql ; ls -l ./taiga_dump.sql )
     echo $bk
 
     ls -Rl $DIR
 
-    exit
-    if [ -f /tmp/taiga.out ]
+    if [ -f $DIR/taiga.out ]
     then
         echo "####------------#
     else
         echo "####------------#
-         msgError "exp termino con problemas"
+        msgError "exp termino con problemas"
     fi
     
-
 
 ## Crea el tar luego de export
 
     msg "## inicio la creacion de tgz"
-    mkdir -p $( dirname $DESTTGZ )
-    rm -f $DESTTGZ
-    tar -cvzf $DIRDEST/${database}_${fecha}.tgz $DESTTEMP/${database}_${fecha}.dmp $DESTTEMP/${database}_${fecha}.log > $tout 2>&1 
+    mkdir -p /backup/tgz
+    TGZ="/backup/tgz/bk$fecha.tgz"
+    echo tar -cvzf $TGZ $DIR  
+    tar -cvzf $TGZ $DIR  
     cc=$?
     if [ $cc -ne 0 ]
     then
          msgError "tar termino con problemas"
     fi
-    msg "## tgz creado cc=$cc"
-    cat $tout
-
+    msg "## tgz creado $TGZ cc=$cc"
 
 ## Borra los expandidos
-
-    msg "## info del dump"
-    ls -l  $DESTTEMP/${database}_${fecha}.dmp $DESTTEMP/${database}_${fecha}.log
-    ls -l  $DESTTEMP/${database}_${fecha}.dmp $DESTTEMP/${database}_${fecha}.log >> $mail
-
-    msg "## borro los expandidos"
-    rm -f $DESTTEMP/${database}_${fecha}.dmp $DESTTEMP/${database}_${fecha}.log
-    msg "## expandidos borrados"
-
+    rm -rf $DIR
 
 ## Fin del proceso
     msg ">> Fin del Proceso de Backup-Hot / Tiempo Total $SECONDS segs"
     dest="pmessina@invap.com.ar"
-    mail -s "Backup-Hot ${database} ${fecha}" -a $eout -a $tout  $dest < $mail
+    #mail -s "Backup-Hot ${database} ${fecha}" -a $eout -a $tout  $dest < $mail
     if [ $? -eq 0 ] 
     then
         rm -f $attrb
