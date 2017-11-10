@@ -10,7 +10,6 @@ usage="Usage: backup-hot [database] -h help "
 help=$(cat <<'END_HEREDOC'
 Mandatory arguments to long options are mandatory for short options too.
   -d [database]        seleciona la base de datos a backup
-  -r [dias retencion]  cantidad de dias de retencion 
   -h, --help     display this help and exit
       --version  output version information and exit
 END_HEREDOC
@@ -56,10 +55,6 @@ while getopts ":d:r:hc" opt; do
       database=$OPTARG
       export database
       ;;
-    r)
-      #echo "-r days con: $OPTARG" >&2
-      DAYS=$OPTARG
-      ;;
     \?)
       echo "Invalid option: -$OPTARG" >&2
       exit 1
@@ -76,9 +71,9 @@ while getopts ":d:r:hc" opt; do
   esac
 done
 
-if [ "$database" = "" ] || [ "$DAYS" = "" ]
+if [ "$database" = "" ] 
 then
-    echo "Error: debe seleccionar -d [database] y -r [days]"
+    echo "Error: debe seleccionar -d [database]"
     exit -1
 
 fi

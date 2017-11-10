@@ -1,0 +1,127 @@
+#!/bin/bash
+#Desc: realiza el backup de las bases de datos en modo Hot
+# ---------------------------------------------
+#
+#
+# pmessina@invap.com.ar
+# ---------------------------------------------
+
+
+function msg {
+    d=$( date "+%Y-%m-%d %H:%M:%S" )
+    echo $d $*
+    echo $d $* >> $mail
+}
+
+
+function msgError {
+    d=$( date "+%Y-%m-%d %H:%M:%S" )
+
+    echo "   ########"
+    echo "   #__Error__#"
+    echo "   ########"
+    echo "$d [Error] $*"
+
+    echo "   ########"   >> $mail
+    echo "   #__Error__#">> $mail
+    echo "   ########"   >> $mail
+    echo "$d [Error] $*" >> $mail
+}
+
+
+attrb=/tmp/$$.attrb
+files=/tmp/$$.files
+md5s=/tmp/$$.md5
+eout=/tmp/$$.eout.txt
+tout=/tmp/$$.tout.txt
+mail=/tmp/$$.mail
+
+
+database="taiga"
+DAYS=""
+
+
+## Inicio el Proceso
+    fecha=$( date +%Y-%m-%d_%H-%M )
+    DIR="/backup/exp/bk$fecha"
+
+## Creo directorio de destino
+    mkdir -p $DIR
+
+
+
+
+    msg ">> Inicio del Proceso de Backup-Hot"
+    SECONDS=0
+    msg "## #################################"
+    msg "## parametros ######################"
+    msg "## fecha   $fecha"
+    msg "## DIR     $DIR"
+    msg "## #################################"
+
+
+## copio media
+    find /home/taiga/taiga-back/media/ -type f -exec md5sum {} \; > $DIR/media.md5
+    find /home/taiga/taiga-back/media/ -type f -exec ls -l  {} \; > $DIR/media.attrbs
+    tar -cvzf $DIR/media.tar   /home/taiga/taiga-back/media/ 
+
+## Ejecuto el export
+    
+    msg "## inicio el export"
+    DESTTEMP=/backup/tempdump/
+    bk=$( cd $DIR ; sudo -u taiga pg_dump taiga > ./taiga_dump.sql ; ls -l ./taiga_dump.sql )
+    echo $bk
+
+    ls -Rl $DIR
+
+    exit
+    if [ -f /tmp/taiga.out ]
+    then
+        echo "####------------#
+    else
+        echo "####------------#
+         msgError "exp termino con problemas"
+    fi
+    
+
+
+## Crea el tar luego de export
+
+    msg "## inicio la creacion de tgz"
+    mkdir -p $( dirname $DESTTGZ )
+    rm -f $DESTTGZ
+    tar -cvzf $DIRDEST/${database}_${fecha}.tgz $DESTTEMP/${database}_${fecha}.dmp $DESTTEMP/${database}_${fecha}.log > $tout 2>&1 
+    cc=$?
+    if [ $cc -ne 0 ]
+    then
+         msgError "tar termino con problemas"
+    fi
+    msg "## tgz creado cc=$cc"
+    cat $tout
+
+
+## Borra los expandidos
+
+    msg "## info del dump"
+    ls -l  $DESTTEMP/${database}_${fecha}.dmp $DESTTEMP/${database}_${fecha}.log
+    ls -l  $DESTTEMP/${database}_${fecha}.dmp $DESTTEMP/${database}_${fecha}.log >> $mail
+
+    msg "## borro los expandidos"
+    rm -f $DESTTEMP/${database}_${fecha}.dmp $DESTTEMP/${database}_${fecha}.log
+    msg "## expandidos borrados"
+
+
+## Fin del proceso
+    msg ">> Fin del Proceso de Backup-Hot / Tiempo Total $SECONDS segs"
+    dest="pmessina@invap.com.ar"
+    mail -s "Backup-Hot ${database} ${fecha}" -a $eout -a $tout  $dest < $mail
+    if [ $? -eq 0 ] 
+    then
+        rm -f $attrb
+        rm -f $files
+        rm -f $md5s
+        rm -f $eout
+        rm -f $tout
+        rm -f $mail
+    fi
+exit 0

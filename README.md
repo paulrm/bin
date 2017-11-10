@@ -15,6 +15,9 @@ bash for windows scripts
                             |___/ 
 ```
 
+## 2017-11-10 
+* arreglando backups
+
 ## 2017-07-04
 * Agregado de h y cmds, levemente adaptados
 
