@@ -1,0 +1,199 @@
+#!/bin/bash
+#Desc: realiza el backup de las bases de datos en modo Hot
+# ---------------------------------------------
+#
+#
+# pmessina@invap.com.ar
+# ---------------------------------------------
+
+usage="Usage: backup-hot [database] -h help " 
+help=$(cat <<'END_HEREDOC'
+Mandatory arguments to long options are mandatory for short options too.
+  -d [database]        seleciona la base de datos a backup
+  -r [dias retencion]  cantidad de dias de retencion 
+  -h, --help     display this help and exit
+      --version  output version information and exit
+END_HEREDOC
+)
+
+function msg() {
+    d=$( date "+%Y-%m-%d %H:%M:%S" )
+    echo $d $*
+    echo $d $* >> $mail
+}
+
+
+function msgError() {
+    d=$( date "+%Y-%m-%d %H:%M:%S" )
+
+    echo "   ########"
+    echo "   #__Error__#"
+    echo "   ########"
+    echo "$d [Error] $*"
+
+    echo "   ########"   >> $mail
+    echo "   #__Error__#">> $mail
+    echo "   ########"   >> $mail
+    echo "$d [Error] $*" >> $mail
+}
+
+
+attrb=/tmp/$$.attrb
+files=/tmp/$$.files
+md5s=/tmp/$$.md5
+eout=/tmp/$$.eout.txt
+tout=/tmp/$$.tout.txt
+mail=/tmp/$$.mail
+
+
+database=""
+DAYS=""
+
+while getopts ":d:r:hc" opt; do
+  case $opt in
+    d)
+      #echo "-d database con: $OPTARG" >&2
+      database=$OPTARG
+      export database
+      ;;
+    r)
+      #echo "-r days con: $OPTARG" >&2
+      DAYS=$OPTARG
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    h)
+      #echo "-$opt was triggered, Parameter: $OPTARG" >&2
+      echo -e $help
+      exit -1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+if [ "$database" = "" ] || [ "$DAYS" = "" ]
+then
+    echo "Error: debe seleccionar -d [database] y -r [days]"
+    exit -1
+
+fi
+
+if [ $# -eq 0 ]
+then
+    echo $usage
+    exit -1
+fi
+
+
+re='^[0-9]+$'
+if ! [[ $DAYS =~ $re ]] 
+then
+    echo "error: $DAYS Not a number" >&2 
+    exit 1
+fi
+
+## Inicio el Proceso
+    fecha=$( date +%Y-%m-%d )
+    DESTTGZ="/backup/$database/hot/${database}_exp_${fecha}.tgz"
+
+    msg ">> Inicio del Proceso de Backup-Hot"
+    SECONDS=0
+    msg "## #################################"
+    msg "## parametros ######################"
+    msg "## fecha $fecha"
+    msg "## db ${database}"
+    msg "## DESTTGZ $DESTTGZ"
+    msg "## DAYS $DAYS"
+    msg "## #################################"
+
+## Preparo las variables de Entorno
+
+    ORACLE_BASE=/oracle/app/oracle
+    ORACLE_HOME=/oracle/app/oracle/product/11.2.0/dbhome_1
+    ORACLE_PATH=$ORACLE_HOME/bin
+    NLS_LANG=AMERICAN_AMERICA.WE8MSWIN1252
+    ORACLE_SID=$database
+    
+    PATH=$PATH:$ORACLE_PATH
+    
+    export ORACLE_BASE
+    export ORACLE_PATH 
+    export ORACLE_HOME 
+    export NLS_LANG 
+    export ORACLE_SID 
+    export PATH
+    
+## Creo directorio de destino
+
+    DIRDEST=$( dirname $DESTTGZ )
+    mkdir -p $DIRDEST
+
+## Ejecuto el export
+
+    case $database in
+        "condore")
+    userid="backup/bkpcondore"
+          ;;
+        "condorw")
+    userid="backup/seguro"
+          ;;
+        "siprod")
+    userid="backup/total"
+          ;;
+    esac
+    msg "## inicio el export"
+    DESTTEMP=/archive/tempdump/
+    exp userid=${userid}  full=y statistics=none buffer=100000 file=$DESTTEMP/${database}_${fecha}.dmp log=$DESTTEMP/${database}_${fecha}.log > $eout 2>&1 
+    cc=$?
+    if [ $cc -ne 0 ]
+    then
+         msgError "exp termino con problemas"
+    fi
+    msg "## fin del export creado cc=$cc"
+
+
+## Crea el tar luego de export
+
+    msg "## inicio la creacion de tgz"
+    mkdir -p $( dirname $DESTTGZ )
+    rm -f $DESTTGZ
+    tar -cvzf $DIRDEST/${database}_${fecha}.tgz $DESTTEMP/${database}_${fecha}.dmp $DESTTEMP/${database}_${fecha}.log > $tout 2>&1 
+    cc=$?
+    if [ $cc -ne 0 ]
+    then
+         msgError "tar termino con problemas"
+    fi
+    msg "## tgz creado cc=$cc"
+    cat $tout
+
+
+## Borra los expandidos
+
+    msg "## info del dump"
+    ls -l  $DESTTEMP/${database}_${fecha}.dmp $DESTTEMP/${database}_${fecha}.log
+    ls -l  $DESTTEMP/${database}_${fecha}.dmp $DESTTEMP/${database}_${fecha}.log >> $mail
+
+    msg "## borro los expandidos"
+    rm -f $DESTTEMP/${database}_${fecha}.dmp $DESTTEMP/${database}_${fecha}.log
+    msg "## expandidos borrados"
+
+
+## Fin del proceso
+    msg ">> Fin del Proceso de Backup-Hot / Tiempo Total $SECONDS segs"
+    dest="pmessina@invap.com.ar,plesjak@invap.com.ar"
+    mail -s "Backup-Hot ${database} ${fecha}" -a $eout -a $tout  $dest < $mail
+    if [ $? -eq 0 ] 
+    then
+        rm -f $attrb
+        rm -f $files
+        rm -f $md5s
+        rm -f $eout
+        rm -f $tout
+        rm -f $mail
+    fi
+exit 0

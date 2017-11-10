@@ -1,0 +1,10 @@
+rm -f ./README.md
+rm -f ./catalog.sh
+rm -f ./cmds
+rm -f ./createDirs.sh
+rm -f ./h
+rm -f ./hello.py
+rm -f ./info
+rm -f ./test-curl.sh
+rm -f ./test01.py
+rm -f ./killTrace
