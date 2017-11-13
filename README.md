@@ -15,7 +15,8 @@ bash for windows scripts
 
 ## 2017-11-13
 * puliendo el backup taiga
-* :Idea:  un delete que borre x dias atras, pero deje 
+* :Idea:  un delete que borre x dias atras, pero deje -x semanales x mensuales
+* Renombrado backup-taiga
 
 ## 2017-11-10 
 * arreglando backups

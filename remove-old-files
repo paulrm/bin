@@ -1,0 +1,159 @@
+#!/bin/bash
+#Desc: borra los archivos mas antiguos de atributo -r [dias] del dir -p [path]
+# ---------------------------------------------
+#
+#
+# pmessina@invap.com.ar
+# ---------------------------------------------
+
+usage="Usage: remove-old-backups-files [database] -h help " 
+help=$(cat <<'END_HEREDOC'
+Mandatory arguments to long options are mandatory for short options too.
+  -p [path]        seleciona la base de datos a backup
+  -r [dias retencion]  cantidad de dias de retencion 
+  -h, --help     display this help and exit
+      --version  output version information and exit
+END_HEREDOC
+)
+
+function msg() {
+    d=$( date "+%Y-%m-%d %H:%M:%S" )
+    echo $d $*
+    echo $d $* >> $mail
+}
+
+fecha=$( date +%Y-%m-%d )
+data=/tmp/$$.data
+mail=/tmp/remove-old-backups-files.$$.txt
+
+database=""
+DAYS=""
+CONFIRM="no"
+
+while getopts ":p:r:hyc" opt; do
+  case $opt in
+    p)
+      echo "-p database con: $OPTARG" >&2
+      DPATH=$OPTARG
+      ;;
+    r)
+      echo "-r days con: $OPTARG" >&2
+      DAYS=$OPTARG
+      ;;
+    y)
+      echo "-y database con: $OPTARG" >&2
+      CONFIRM="yes"
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    h)
+      #echo "-$opt was triggered, Parameter: $OPTARG" >&2
+      echo -e $help
+      exit -1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+if [ "$DPATH" = "" ] || [ "$DAYS" = "" ]
+then
+    echo "Error: debe seleccionar -p [path] y -r [days]"
+    exit -1
+
+fi
+
+if [ $# -eq 0 ]
+then
+    echo $usage
+    exit -1
+fi
+
+## Verifico que $DAYS sea un numero
+
+re='^[0-9]+$'
+if ! [[ $DAYS =~ $re ]] 
+then
+    echo "error: $DAYS Not a number" >&2
+    exit 1
+fi
+
+## Verifico que $PATH sea un path valido
+
+if ! [[ -d $DPATH ]]
+then
+    echo "error: $DPATH no es un dir valido" >&2
+    exit 2
+fi
+
+msg ">> Inicio del Proceso de remove-old-backups-file"
+SECONDS=0
+msg "## #################################"
+msg "## parametros ######################"
+msg "## fecha $fecha"
+msg "## DIR $DPATH"
+msg "## DAYS $DAYS"
+msg "## #################################"
+
+## Empieza el procesos
+
+find $DPATH -type f -mtime +$DAYS -exec stat -c "%Y|%y|%s|%n" {} \; | sort -n > $data
+
+gawk -v NOW=`date +%s` '
+function human(x) {
+         s=" B   KiB MiB GiB TiB EiB PiB YiB ZiB"
+         while (x>=1024 && length(s)>1) 
+               {x/=1024; s=substr(s,5)}
+         s=substr(s,1,4)
+         xf=(s==" B  ")?"%5d   ":"%8.2f"
+         return sprintf( xf"%s", x, s)
+      }
+BEGIN { 
+    FS="|" 
+    printf "%-60s  | %-15s | %-20s | %s \n",  "Nombre", "Size" , "Fecha",  "Days Ago"
+    tsize=0
+} 
+{  
+    gsub(".000000000 -0300","",$2)
+    printf "%-60s  | %15s | %20s | %-5d \n",  $4, human($3), $2,  ( ( NOW - $1) / (60*60*24) ) 
+    tsize=tsize + $3
+}
+END {
+    print "Espacio Total a liberar " human(tsize)
+}' $data > $mail 
+cat $mail
+
+echo "Espacio antes del proceso de borraro"  
+df -h $DPATH
+echo "Espacio antes del proceso de borraro" >> $mail
+df -h $DPATH >> $mail
+
+## Si esta el parametro -y ejecuta la borrada
+if [ ${CONFIRM} = "yes"  ]
+then
+    df -h $DPATH
+    find $DPATH -type f -mtime +$DAYS -delete
+    echo "Espacio luego de borraro"  
+    df -h $DPATH
+    echo "Espacio luego de borraro" >> $mail
+    df -h $DPATH >> $mail
+   
+## Envia mail de informe
+
+dest="pmessina@invap.com.ar"
+mail -s "remove-old-backups-files path=$DPATH days=$DAYS" $dest < $mail
+
+fi
+
+## Busca directorios vacios
+
+find $DPATH -type d -mtime +$DAYS -empty
+
+rm -f $data
+rm -f $mail
+
+exit 0
