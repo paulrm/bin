@@ -2,8 +2,6 @@
 bash for windows scripts
 
 
-
-
 ```
  _    _ _     _                   
 | |  | (_)   | |                  
@@ -14,6 +12,10 @@ bash for windows scripts
                              __/ |
                             |___/ 
 ```
+
+## 2017-11-13
+* puliendo el backup taiga
+* :Idea:  un delete que borre x dias atras, pero deje 
 
 ## 2017-11-10 
 * arreglando backups
