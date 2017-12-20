@@ -1,0 +1,2 @@
+dpkg -l > ~/etc/pkglist.txt
+apt-get upgrade --dry-run > ~/etc/updates.txt

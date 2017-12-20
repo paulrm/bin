@@ -1,0 +1,160 @@
+#!/bin/bash
+##
+## // XXX: Argegar la opcion -rm para eliminar archivos de la lista
+##
+dest=/root/Config
+svnrev=$( echo "$Rev:: 366 $"  | gawk '{ print $2 }' )
+svndate=$( echo "$Date:: 2017-02-07 10:03:13 #$" | gawk '{ print $2 " " $3 }'  )
+version=1.3
+if [ $# -eq 0 ]
+then
+    # Sin parametros
+    echo "use bkConfig --list | --update | --help"
+fi
+for arg in $*
+do
+    if [ $arg = "--list" ]
+    then
+        if [ -f  ~/etc/config.lst ]
+        then
+           cat ~/etc/config.lst
+        else
+           mkdir -p ~/etc
+           > ~/etc/config.lst
+        fi
+    fi
+
+    if [ $arg = "--init" ]
+    then
+	shift
+	mkdir /root/config
+	if [ $? -ne 0 ]
+        then
+	    echo "error /root/config ya existe"
+	    exit 1
+	fi
+	git --git-dir=/root/config/.git init
+	git --git-dir=/root/config/.git config core.worktree "../../../"
+        cat > /.gitignore << EOF
+/bin/
+/boot/
+/dev/
+/etc/
+/home/
+/lib/
+/lib64/
+/opt/
+/proc/
+/root/
+/run/
+/sbin/
+/software/
+/sys/
+/tmp/
+/usr/
+/var/
+EOF
+        echo "repo local creado"
+        exit
+    fi
+
+    if [ $arg = "--remote" ]
+    then
+	shift
+	git --git-dir=/root/config/.git remote add origin $*
+        echo "Repositorio linkeado"
+        exit
+    fi
+
+    if [ $arg = "--add" ]
+    then
+	shift
+	git --git-dir=/root/config/.git add -f $*
+        exit
+    fi
+
+    if [ $arg = "--commit" ]
+    then
+        shift
+        git --git-dir=/root/config/.git commit -m "$*"
+        exit
+    fi
+
+    if [ $arg = "--sync" ]
+    then
+	shift
+	git --git-dir=/root/config/.git commit -m "$*"
+	git --git-dir=/root/config/.git push origin master 
+        exit
+    fi
+
+    if [ $arg = "--recover" ]
+    then
+        git --git-dir=/root/config/.git fetch origin master
+        git --git-dir=/root/config/.git checkout -f master
+        echo "Archivos recuperados"
+        exit
+    fi
+
+
+    if [ $arg = "--pull" ]
+    then
+        git --git-dir=/root/config/.git pull origin master
+        echo "Archivos actualizados desde el repo"
+        exit
+    fi
+
+    if [ $arg = "--help" ]
+    then
+        echo "usage: bkConfig [--version] [--help] [--update] [<file>]";
+        exit
+    fi
+
+    if [ $arg = "--version" ]
+    then
+        echo "bkConfig version $version.$svnrev / $svndate"
+        exit
+    fi
+    if [ $arg = "--check" ]
+    then
+        find_param=$( cat ~/etc/config.lst )
+        for file in $find_param
+        do
+            if [ -f $file ] 
+            then
+                #echo "::: $file :::"
+                diff $file ~/Config/$file > /dev/null 2>&1
+                cc=$?
+                if [ "$cc" -gt 0 ]
+                then
+                    echo ":: $file              diff -y  --suppress-common-lines $file ~/Config/$file"
+                fi
+            fi
+        done
+    fi
+    if [ $arg = "--update" ]
+    then
+        echo ":::: Update :::::"
+        #rpm -qa | sort > ~/etc/rpmlist.txt
+        #zypper lu > ~/etc/updates.txt
+        #zypper lr > ~/etc/repos.txt
+        find_param=$( cat ~/etc/config.lst )
+        find_cmd=$( echo "find $find_param -print" )
+        $find_cmd | cpio -pvdum $dest > /tmp/bkConfig-update.log 2>/1
+        cd $dest
+        #svn status ~/Config
+        #toAdd=$( svn status ~/Config | grep '^?' | gawk '{ print $2 }' )
+        #for add in $toAdd
+        # do
+        #    svn add $toAdd
+        #done
+    fi
+    if [ -f $arg ]
+    then
+        file=$arg
+        complete=$( readlink -f $file )
+        echo ":::: $complete "
+        echo $complete >> ~/etc/config.lst
+        sort -u ~/etc/config.lst -o ~/etc/config.lst
+    fi
+done
