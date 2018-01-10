@@ -13,6 +13,9 @@ bash for windows scripts
                             |___/ 
 ```
 
+## 2018-01-10
+* agregado de repos y algunos otros scripts
+
 ## 2017-11-13
 * puliendo el backup taiga
 * :Idea:  un delete que borre x dias atras, pero deje -x semanales x mensuales

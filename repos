@@ -1,0 +1,13 @@
+## 
+## Busca todos los repos de git de un server 
+## E informa la fecha de ultimo comit
+# sudo find / -name ".git" -type d
+i=0
+for repo in $( sudo find / -name ".git" -type d )
+do
+    echo "> $repo"
+    i=$( expr $i + 1 )
+done
+
+echo "qty de repos $i "
+echo "script run in $SECONDS seconds"
