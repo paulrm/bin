@@ -21,6 +21,14 @@
 ## 2018-01-10
 * agregado de repos y algunos otros scripts
  ----
+ <https://github.com/paulrm/bin/issues/25>
+ Paul
+ pmessina@invap.com.ar
+ ----
+ <https://github.com/paulrm/bin/issues/27>
+ Paul Messina
+ paul.messina@gmail.com
+ ----
  <https://github.com/paulrm/bin/issues/22>
  Paul
  pmessina@invap.com.ar
