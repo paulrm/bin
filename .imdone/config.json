@@ -45,6 +45,10 @@
     {
       "name": "HELP",
       "hidden": false
+    },
+    {
+      "name": "Description",
+      "hidden": false
     }
   ],
   "marked": {
