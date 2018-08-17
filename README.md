@@ -7,7 +7,7 @@
 
 #
 
-- [hacer orden en subdir id:7](#ToDo:)
+- [hacer orden en subdir id:7](#IDEA:)
 - [logger de actividad id:12](#IDEA:)
 
 
@@ -25,6 +25,14 @@
 
 ## 2018-01-10
 * agregado de repos y algunos otros scripts
+ ----
+ <https://github.com/paulrm/bin/issues/11>
+ Paul
+ ----
+ <https://github.com/paulrm/bin/issues/12>
+ Paul Messina
+ paul.messina@gmail.com
+ pmessina@invap.com.ar
 
 ## 2017-11-13
 * puliendo el backup taiga
