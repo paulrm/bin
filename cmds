@@ -4,31 +4,35 @@
 
 
 #Description: Lista los comandos disponbles y su descripcions id:3
-usage="Usage: cmds [OPTION] ..."
-help=$(cat <<'END_HEREDOC'
-Mandatory arguments to long options are mandatory for short options too.
-   -p,            Lista los cmds que no tienen doc     
-   -h, --help     display this help and exit
-       --version  output version information and exit
-END_HEREDOC
-)
-showFiles='false'
-while getopts ":hp" opt; do
-   case $opt in
-     h)
-       echo "$usage"
-       echo "$help"
-       exit
-       ;;
-     p)
-       #echo "-p was triggered!" >&2
-       showFiles='true'
-       ;;
-     \?)
-       echo "Invalid option: -$OPTARG" >&2
-       ;;
-   esac
- done
+ usage="Usage: cmds [OPTION] ..."
+ help=$(cat <<'END_HEREDOC'
+ Mandatory arguments to long options are mandatory for short options too.
+    -p,            Lista los cmds que no tienen doc     
+    -h, --help     display this help and exit
+        --version  output version information and exit
+ END_HEREDOC
+ )
+ showFiles='false'
+ while getopts ":hp" opt; do
+    case $opt in
+      h)
+        echo "$usage"
+        echo "$help"
+        exit
+        ;;
+      p)
+        #echo "-p was triggered!" >&2
+        showFiles='true'
+        ;;
+      \?)
+        echo "Invalid option: -$OPTARG" >&2
+        ;;
+    esac
+  done
+ ----
+ <https://github.com/paulrm/bin/issues/15>
+ Paul Messina
+ paul.messina@gmail.com
 
 ok=0
 pending=0
