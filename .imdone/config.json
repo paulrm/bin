@@ -38,6 +38,14 @@
     {
       "name": "Desc",
       "hidden": false
+    },
+    {
+      "name": "ToDo",
+      "hidden": false
+    },
+    {
+      "name": "IDEA",
+      "hidden": false
     }
   ],
   "marked": {

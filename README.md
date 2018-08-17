@@ -8,7 +8,7 @@
 # 
 
 - [hacer orden en subdir id:7](#ToDo:)
-- [logger de actividad](#IDEA:)
+- [logger de actividad id:12](#IDEA:)
 
 
 
@@ -19,7 +19,15 @@
  <https://github.com/paulrm/bin/issues/5>
  Paul
  pmessina@invap.com.ar
+ ----
+ <https://github.com/paulrm/bin/issues/8>
+ Paul
+ pmessina@invap.com.ar
 | |__| |_ ___| |_ ___  _ __ _   _ 
+ ----
+ <https://github.com/paulrm/bin/issues/9>
+ Paul Messina
+ paul.messina@gmail.com
 |  __  | / __| __/ _ \| '__| | | |
 | |  | | \__ \ || (_) | |  | |_| |
 |_|  |_|_|___/\__\___/|_|   \__, |
