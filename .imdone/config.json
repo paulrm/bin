@@ -28,6 +28,10 @@
     {
       "hidden": false,
       "name": "Description"
+    },
+    {
+      "name": "FIX",
+      "hidden": false
     }
   ],
   "code": {
@@ -45,7 +49,8 @@
       "NOTE",
       "REVIEW",
       "MARK",
-      "HELP"
+      "HELP",
+      "FIX"
     ]
   },
   "keepEmptyPriority": false,
