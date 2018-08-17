@@ -7,7 +7,7 @@
 
 # Tareas
 - [hacer orden en subdir id:7](#IDEA:)
-- [logger de actividad id:12](#IDEA:)
+- [logger de actividad id:12](#FIX:)
 
 
 # History
