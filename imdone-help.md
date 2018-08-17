@@ -1,6 +1,6 @@
 imdone-help
 ====
-#HELP: Try dragging this card to your new list +imdone-help id:8
+#DONE: Try dragging this card to your new list +imdone-help id:8
 #HELP: Ignore files by adding `.imdoneignore` to the root of your project. +imdone-help id:1
 - [imdone.io](https://imdone.io) implements this with the [ignore package](https://www.npmjs.com/package/ignore)
 
