@@ -10,7 +10,6 @@
 - [logger de actividad id:12](#IDEA:)
 
 
-
 # History
 ## 2018-08-17
 * Volviendo a tomar temas
