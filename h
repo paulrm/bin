@@ -1,5 +1,9 @@
 #!/bin/bash
-#Desc: Muestra tareas usuales
+#Desc: Muestra tareas usuales id:10
+ ----
+ <https://github.com/paulrm/bin/issues/6>
+ Paul Messina
+ paul.messina@gmail.com
 
 SELF=$( basename $0 )
 SELF_LONG=$0

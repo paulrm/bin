@@ -1,3 +1,5 @@
+[![TODO board](https://imdone.io/api/1.0/projects/5b76ce7739181b392aa142e3/badge)](https://imdone.io/app#/board/paulrm/bin)
+
 # bin
 - scrips utilies para el workflow diario
   - deberian ser para cualquier user root no-root
@@ -5,13 +7,17 @@
 
 # 
 
-- [hacer orden en subdir](#todo:)
+- [hacer orden en subdir id:7](#todo:)
 
 
 
 ```
  _    _ _     _                   
 | |  | (_)   | |                  
+ ----
+ <https://github.com/paulrm/bin/issues/5>
+ Paul
+ pmessina@invap.com.ar
 | |__| |_ ___| |_ ___  _ __ _   _ 
 |  __  | / __| __/ _ \| '__| | | |
 | |  | | \__ \ || (_) | |  | |_| |
