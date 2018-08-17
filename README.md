@@ -3,25 +3,29 @@
   - deberian ser para cualquier user root no-root
 
 
-# 
+#
 
 - [hacer orden en subdir](#todo:)
+- [Ver de que imdome no tome en cuenta los DESC de los cmds](#todo:)
+- el pluging del imdome anda raro, toma la data de la nube, pero no parece hacer algunas funciones
+  - login
+  - crear desde el atom
 
 
 
 ```
- _    _ _     _                   
-| |  | (_)   | |                  
-| |__| |_ ___| |_ ___  _ __ _   _ 
+ _    _ _     _
+| |  | (_)   | |
+| |__| |_ ___| |_ ___  _ __ _   _
 |  __  | / __| __/ _ \| '__| | | |
 | |  | | \__ \ || (_) | |  | |_| |
 |_|  |_|_|___/\__\___/|_|   \__, |
                              __/ |
-                            |___/ 
+                            |___/
 ```
 
 ## 2018-08-17
-* Volviendo a tomar temas 
+* Volviendo a tomar temas
 * Configurado den Imdome
 
 ## 2018-01-16
@@ -35,7 +39,7 @@
 * :Idea:  un delete que borre x dias atras, pero deje -x semanales x mensuales
 * Renombrado backup-taiga
 
-## 2017-11-10 
+## 2017-11-10
 * arreglando backups
 
 ## 2017-07-04
