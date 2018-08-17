@@ -13,6 +13,13 @@ bash for windows scripts
                             |___/ 
 ```
 
+## 2018-08-17
+* Volviendo a tomar temas 
+* Configurado den Imdome
+
+## 2018-01-16
+* Volviendo a tomar temas
+
 ## 2018-01-10
 * agregado de repos y algunos otros scripts
 
