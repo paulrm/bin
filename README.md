@@ -7,7 +7,7 @@
 
 #
 
-- [hacer orden en subdir id:7](#ToDo:)
+- [hacer orden en subdir id:7](#IDEA:)
 - [logger de actividad id:12](#IDEA:)
 
 
