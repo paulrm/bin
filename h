@@ -1,10 +1,5 @@
 #!/bin/bash
-#Description: Muestra tareas usuales id:10
- ----
- <https://github.com/paulrm/bin/issues/6>
- Paul Messina
- paul.messina@gmail.com
-
+#-Description: Muestra tareas usuales id:10
 SELF=$( basename $0 )
 SELF_LONG=$0
 SELF_VERSION="0.01"
