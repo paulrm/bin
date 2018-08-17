@@ -1,5 +1,12 @@
 # bin
-bash for windows scripts
+- scrips utilies para el workflow diario
+  - deberian ser para cualquier user root no-root
+
+
+# 
+
+- [hacer orden en subdir](#todo:)
+
 
 
 ```
@@ -36,7 +43,7 @@ bash for windows scripts
 
 
 
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/0zZ2d0Xdnjg/0.jpg)](http://www.youtube.com/watch?v=0zZ2d0Xdnjg "Video Title"
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/0zZ2d0Xdnjg/0.jpg)](http://www.youtube.com/watch?v=0zZ2d0Xdnjg "Video Title")
 
 
 [![Everything Is AWESOME](https://img.youtube.com/vi/StTqXEQ2l-Y/0.jpg)](https://www.youtube.com/watch?v=StTqXEQ2l-Y "Everything Is AWESOME")
