@@ -1,5 +1,5 @@
 #!/bin/bash
-#Desc: Muestra tareas usuales id:10
+#Description: Muestra tareas usuales id:10
  ----
  <https://github.com/paulrm/bin/issues/6>
  Paul Messina

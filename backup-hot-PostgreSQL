@@ -1,5 +1,5 @@
 #!/bin/bash
-#ToDo: realiza el backup de las bases de datos en modo Hot id:0
+#Description: realiza el backup de las bases de datos en modo Hot id:0
  # ---------------------------------------------
  #
  #
