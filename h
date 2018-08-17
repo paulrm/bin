@@ -1,9 +1,13 @@
 #!/bin/bash
 #-Description: Muestra tareas usuales id:10
-SELF=$( basename $0 )
-SELF_LONG=$0
-SELF_VERSION="0.01"
-SELF_AUTHOR="Paul Messina"
+ SELF=$( basename $0 )
+ SELF_LONG=$0
+ SELF_VERSION="0.01"
+ SELF_AUTHOR="Paul Messina"
+ ----
+ <https://github.com/paulrm/bin/issues/26>
+ Paul Messina
+ paul.messina@gmail.com
 
 TEMP=`getopt -o vh1dm: \
              --long version,help,verbose,debug,memory:,debugfile:,minheap:,maxheap: \
