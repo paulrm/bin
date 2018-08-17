@@ -1,3 +1,5 @@
+[![TODO board](https://imdone.io/api/1.0/projects/5b76ce7739181b392aa142e3/badge)](https://imdone.io/app#/board/paulrm/bin)
+
 # bin
 - scrips utilies para el workflow diario
   - deberian ser para cualquier user root no-root
@@ -5,25 +7,15 @@
 
 #
 
-- [hacer orden en subdir](#todo:)
-- [Ver de que imdome no tome en cuenta los DESC de los cmds](#todo:)
-- el pluging del imdome anda raro, toma la data de la nube, pero no parece hacer algunas funciones
-  - login
-  - crear desde el atom
+- [hacer orden en subdir id:7](#ToDo:)
+- [logger de actividad id:12](#IDEA:)
 
 
 
-```
- _    _ _     _
-| |  | (_)   | |
-| |__| |_ ___| |_ ___  _ __ _   _
-|  __  | / __| __/ _ \| '__| | | |
-| |  | | \__ \ || (_) | |  | |_| |
-|_|  |_|_|___/\__\___/|_|   \__, |
-                             __/ |
-                            |___/
-```
 
+
+
+# History
 ## 2018-08-17
 * Volviendo a tomar temas
 * Configurado den Imdome

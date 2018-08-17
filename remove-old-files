@@ -1,10 +1,14 @@
 #!/bin/bash
-#Desc: borra los archivos mas antiguos de atributo -r [dias] del dir -p [path]
-# ---------------------------------------------
-#
-#
-# pmessina@invap.com.ar
-# ---------------------------------------------
+#Desc: borra los archivos mas antiguos de atributo -r [dias] del dir -p [path] id:2
+ # ---------------------------------------------
+ #
+ #
+ # pmessina@invap.com.ar
+ # ---------------------------------------------
+ ----
+ <https://github.com/paulrm/bin/issues/2>
+ pmessina
+ pmessina@invap.com.ar
 
 usage="Usage: remove-old-backups-files [database] -h help " 
 help=$(cat <<'END_HEREDOC'

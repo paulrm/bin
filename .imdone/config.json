@@ -17,7 +17,8 @@
       "XXX",
       "IDEA",
       "NOTE",
-      "REVIEW"
+      "REVIEW",
+      "HELP"
     ]
   },
   "lists": [
@@ -26,8 +27,24 @@
       "hidden": false
     },
     {
-      "name": "Descript",
+      "name": "Desc",
       "hidden": true
+    },
+    {
+      "name": "ToDo",
+      "hidden": false
+    },
+    {
+      "name": "IDEA",
+      "hidden": false
+    },
+    {
+      "name": "DONE",
+      "hidden": false
+    },
+    {
+      "name": "HELP",
+      "hidden": false
     }
   ],
   "marked": {
