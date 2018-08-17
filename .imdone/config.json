@@ -18,6 +18,7 @@
       "IDEA",
       "NOTE",
       "REVIEW",
+      "MARK",
       "HELP"
     ]
   },
@@ -54,5 +55,10 @@
     "pedantic": false,
     "smartLists": true,
     "langPrefix": "language-"
+  },
+  "sync": {
+    "id": "5b76ce7739181b392aa142e3",
+    "name": "paulrm/bin",
+    "useImdoneioForPriority": true
   }
 }
