@@ -1,6 +1,11 @@
 dpkg -l > ~/etc/pkglist.txt
 apt-get upgrade --dry-run > ~/etc/updates.txt
 egrep -v '^#|^ *$' /etc/apt/sources.list /etc/apt/sources.list.d/* > ~/etc/repositories.txt
+> ~/etc/path.txt
+for dir in $( echo $PATH | gawk 'BEGIN { RS=":" } { print $0 }' | sort  )
+do
+    echo $dir >> ~/etc/path.txt
+done
 
 
 

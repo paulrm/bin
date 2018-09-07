@@ -34,6 +34,11 @@ ok=0
 pending=0
 
 dirs="/c/Users/Messina Paul/bin"
+if [ ! -d $dirs ] 
+then
+    echo "Error: $dirs no es un directorio"
+    exit 1
+fi
 
 
 OLDIFS=$IFS

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for dir in $( echo $PATH | gawk 'BEGIN { RS=":" } { print $0 } ' )
+do
+    echo $dir
+done
