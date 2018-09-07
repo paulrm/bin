@@ -1,0 +1,65 @@
+{
+  "exclude": [
+    "^(node_modules|bower_components|\\.imdone|target|build|dist|logs|flow-typed|imdone-export.json)[\\/\\\\]?|\\.(git|svn|hg|npmignore)|\\~$|\\.(jpg|png|gif|swp|ttf|otf)$"
+  ],
+  "watcher": true,
+  "keepEmptyPriority": false,
+  "code": {
+    "include_lists": [
+      "TODO",
+      "DOING",
+      "DONE",
+      "PLANNING",
+      "FIXME",
+      "ARCHIVE",
+      "HACK",
+      "CHANGED",
+      "XXX",
+      "IDEA",
+      "NOTE",
+      "REVIEW",
+      "MARK",
+      "HELP",
+      "FIX"
+    ]
+  },
+  "lists": [
+    {
+      "hidden": false,
+      "name": "ToDo"
+    },
+    {
+      "hidden": false,
+      "name": "IDEA"
+    },
+    {
+      "hidden": false,
+      "name": "DONE"
+    },
+    {
+      "hidden": false,
+      "name": "Description"
+    },
+    {
+      "name": "FIX",
+      "hidden": false
+    },
+    {
+      "name": "-Description",
+      "hidden": false
+    }
+  ],
+  "marked": {
+    "langPrefix": "language-",
+    "smartLists": true,
+    "pedantic": false,
+    "breaks": false,
+    "tables": true,
+    "gfm": true
+  },
+  "sync": {
+    "useImdoneioForPriority": true,
+    "name": "paulrm/bin",
+    "id": "5b76ce7739181b392aa142e3"
+  }
+}

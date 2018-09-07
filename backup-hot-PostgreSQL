@@ -1,10 +1,14 @@
 #!/bin/bash
-#Desc: realiza el backup de las bases de datos en modo Hot
-# ---------------------------------------------
-#
-#
-# pmessina@invap.com.ar
-# ---------------------------------------------
+#Description: realiza el backup de las bases de datos en modo Hot id:0
+ # ---------------------------------------------
+ #
+ #
+ # pmessina@invap.com.ar
+ # ---------------------------------------------
+ ----
+ <https://github.com/paulrm/bin/issues/1>
+ pmessina
+ pmessina@invap.com.ar
 
 usage="Usage: backup-hot [database] -h help " 
 help=$(cat <<'END_HEREDOC'

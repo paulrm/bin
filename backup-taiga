@@ -1,10 +1,14 @@
 #!/bin/bash
-#Desc: realiza el backup de las bases de datos en modo Hot
-# ---------------------------------------------
-#
-#
-# pmessina@invap.com.ar
-# ---------------------------------------------
+#Description: realiza el backup de las bases de datos en modo Hot id:5
+ # ---------------------------------------------
+ #
+ #
+ # pmessina@invap.com.ar
+ # ---------------------------------------------
+ ----
+ <https://github.com/paulrm/bin/issues/4>
+ pmessina
+ pmessina@invap.com.ar
 
 
 function msg {
