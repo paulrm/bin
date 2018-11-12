@@ -23,6 +23,14 @@
 * Volviendo a tomar temas
 
 ## 2018-01-10
+ ----
+ <https://github.com/paulrm/bin/issues/32>
+ Paul
+ pmessina@invap.com.ar
+ ----
+ <https://github.com/paulrm/bin/issues/33>
+ Paul Messina
+ paul.messina@gmail.com
 * agregado de repos y algunos otros scripts
  ----
  <https://github.com/paulrm/bin/issues/29>
