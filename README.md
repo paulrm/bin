@@ -10,7 +10,11 @@
 - [logger de actividad id:12](#FIX:)
 
 
-# History
+#   History
+
+## 2018-11-12
+* Agregado de kick
+
 ## 2018-08-17
 * Volviendo a tomar temas
 * Configurado den Imdome
