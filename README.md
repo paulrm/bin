@@ -10,7 +10,11 @@
 - [logger de actividad id:12](#FIX:)
 
 
-# History
+#   History
+
+## 2018-11-12
+* Agregado de kick
+
 ## 2018-08-17
 * Volviendo a tomar temas
 * Configurado den Imdome
@@ -19,7 +23,31 @@
 * Volviendo a tomar temas
 
 ## 2018-01-10
+ ----
+ <https://github.com/paulrm/bin/issues/32>
+ Paul
+ pmessina@invap.com.ar
+ ----
+ <https://github.com/paulrm/bin/issues/33>
+ Paul Messina
+ paul.messina@gmail.com
 * agregado de repos y algunos otros scripts
+ ----
+ <https://github.com/paulrm/bin/issues/29>
+ Paul
+ pmessina@invap.com.ar
+ ----
+ <https://github.com/paulrm/bin/issues/30>
+ Paul Messina
+ paul.messina@gmail.com
+ ----
+ <https://github.com/paulrm/bin/issues/25>
+ Paul
+ pmessina@invap.com.ar
+ ----
+ <https://github.com/paulrm/bin/issues/27>
+ Paul Messina
+ paul.messina@gmail.com
  ----
  <https://github.com/paulrm/bin/issues/22>
  Paul
