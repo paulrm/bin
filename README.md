@@ -23,39 +23,12 @@
 * Volviendo a tomar temas
 
 ## 2018-01-10
- ----
- <https://github.com/paulrm/bin/issues/32>
- Paul
- pmessina@invap.com.ar
- ----
- <https://github.com/paulrm/bin/issues/33>
- Paul Messina
- paul.messina@gmail.com
-* agregado de repos y algunos otros scripts
- ----
- <https://github.com/paulrm/bin/issues/29>
- Paul
- pmessina@invap.com.ar
- ----
- <https://github.com/paulrm/bin/issues/30>
- Paul Messina
- paul.messina@gmail.com
- ----
- <https://github.com/paulrm/bin/issues/25>
- Paul
- pmessina@invap.com.ar
- ----
- <https://github.com/paulrm/bin/issues/27>
- Paul Messina
- paul.messina@gmail.com
- ----
- <https://github.com/paulrm/bin/issues/22>
- Paul
- pmessina@invap.com.ar
- ----
- <https://github.com/paulrm/bin/issues/23>
- Paul Messina
- paul.messina@gmail.com
+- <https://github.com/paulrm/bin/issues/36>
+Paul
+pmessina@invap.com.ar
+- <https://github.com/paulrm/bin/issues/37>
+Paul Messina
+paul.messina@gmail.com
 
 ## 2017-11-13
 * puliendo el backup taiga
