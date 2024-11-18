@@ -1,0 +1,40 @@
+flowchart-diagram
+
+// Title of the flowchart
+title User Login and Approval Process
+
+// Login Process
+Login Process [color: lightblue, icon: log-in] {
+  Start Login [shape: oval, icon: user]
+  Enter Credentials [icon: key]
+  Validate Credentials [shape: diamond, icon: check-square]
+  Access Denied [shape: oval, icon: x-square]
+  Access Granted [shape: oval, icon: check-square]
+}
+
+Start Login > Enter Credentials
+Enter Credentials > Validate Credentials
+Validate Credentials > Access Denied: Invalid
+Validate Credentials > Access Granted: Valid
+
+// Form Submission and Approval Process
+Form and Approval [color: lightgreen, icon: file-text] {
+  Start Form Submission [shape: oval, icon: edit]
+  Fill Form [icon: edit-3]
+  Submit Form [icon: send]
+  Legal Review [shape: diamond, icon: briefcase]
+  Approved [shape: oval, icon: thumbs-up]
+  Rejected [shape: oval, icon: thumbs-down]
+  Call API [icon: cloud]
+}
+
+Access Granted > Start Form Submission
+Start Form Submission > Fill Form
+Fill Form > Submit Form
+Submit Form > Legal Review
+Legal Review > Approved: Yes
+Legal Review > Rejected: No
+Approved > Call API
+
+// End Points
+Access Denied > 
